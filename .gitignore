@@ -5,3 +5,5 @@ db.sqlite3
 .env
 .vscode/
 .idea/
+.claude/settings.local.json
+tools/ClaudeAgenticUI/logs/

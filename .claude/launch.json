@@ -6,6 +6,12 @@
       "runtimeExecutable": "myvenv/Scripts/python.exe",
       "runtimeArgs": ["lab02/manage.py", "runserver", "8000", "--noreload"],
       "port": 8000
+    },
+    {
+      "name": "agent-viz",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["tools/ClaudeAgenticUI/server.js"],
+      "port": 7777
     }
   ]
 }

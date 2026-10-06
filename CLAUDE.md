@@ -21,7 +21,8 @@ Este archivo da contexto a Claude Code sobre este proyecto.
 Semana 2/
 ├── CLAUDE.md
 ├── DAE_Laboratorio 2.docx
-├── .claude/agents/        agentes del proyecto
+├── .claude/agents/        Meeseeks del proyecto
+├── tools/ClaudeAgenticUI/ visor de agentes (submódulo git)
 ├── myvenv/                entorno virtual (no se versiona)
 ├── lab02/                 proyecto Django (manage.py, lab02/settings.py, ...)
 │   ├── encuesta/          Actividad 2: formulario + respuesta
@@ -62,13 +63,39 @@ La rúbrica evalúa: views, paso de datos a la plantilla, URLs/enrutamiento, vis
 - No mostrar la contraseña en la página de respuesta.
 - Aceptar coma decimal (`2,15`) en el cilindro, o usar `type="number" step="any"`.
 
-## Agentes (`.claude/agents/`)
+## Agentes: flujo Meeseeks (`.claude/agents/`)
 
-- `django-dev`: implementa vistas, URLs y plantillas según las convenciones.
-- `lab-reviewer`: revisa el trabajo contra la rúbrica y las correcciones del docx. No edita código.
-- `doc-writer`: redacta la Actividad 1 y las conclusiones en `docs/`, con ortografía cuidada.
+Claude es la **Caja Meeseeks**: orquesta y decide. Cada subagente es un **Meeseeks**: aparece para UNA tarea concreta, la hace, reporta y se desvanece.
 
-Las capturas pueden tomarse con el navegador integrado; el video lo graba el alumno.
+| Meeseeks | Tarea única | Escribe en |
+|---|---|---|
+| `meeseeks-django` | Implementar una vista, ruta, plantilla o app | `lab02/` |
+| `meeseeks-revisor` | Revisar contra la rúbrica y reportar (solo lectura) | nada |
+| `meeseeks-redactor` | Redactar un documento (Actividad 1 o conclusiones) | `docs/` |
+
+Flujo:
+1. La Caja divide el trabajo en tareas pequeñas y verificables. Si dos tareas no dependen entre sí, invoca sus Meeseeks **en paralelo** (por ejemplo, una app cada uno).
+2. Cada `meeseeks-django` implementa su tarea y la verifica con `check` y `test`.
+3. Cuando terminan, la Caja invoca un `meeseeks-revisor`. Cada hallazgo se corrige con un `meeseeks-django` nuevo, uno por problema.
+4. Con el código estable, `meeseeks-redactor` escribe los documentos, uno por Meeseeks.
+5. La Caja integra, ejecuta los tests y hace el commit. Los Meeseeks no hacen commits.
+
+Reglas del flujo:
+- Un Meeseeks nunca amplía su tarea. Lo que descubre fuera de ella lo reporta.
+- Si un Meeseeks se atora, reporta el bloqueo; un "listo" sin verificar cuenta como fallo.
+- Los reportes son cortos y cierran con `*puf*`.
+- Las capturas pueden tomarse con el navegador integrado; el video lo graba el alumno.
+
+### Visor: ClaudeAgenticUI
+
+El submódulo `tools/ClaudeAgenticUI` (repo privado `Hellscythe25/ClaudeAgenticUI`) dibuja a la Caja y a cada Meeseeks en vivo. Tras clonar este repo: `git submodule update --init`.
+
+```powershell
+node tools/ClaudeAgenticUI/server.js     # visor en http://localhost:7777
+node tools/ClaudeAgenticUI/setup.js .    # conecta este proyecto (una vez; escribe .claude/settings.local.json)
+```
+
+Los hooks se cargan al iniciar la sesión: después de `setup.js` hay que abrir una sesión nueva de Claude Code. Los logs de `tools/ClaudeAgenticUI/logs/` incluyen prompts y comandos; no se versionan.
 
 ## Convenciones
 

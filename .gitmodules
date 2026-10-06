@@ -1,0 +1,3 @@
+[submodule "tools/ClaudeAgenticUI"]
+	path = tools/ClaudeAgenticUI
+	url = https://github.com/Hellscythe25/ClaudeAgenticUI
