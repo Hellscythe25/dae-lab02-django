@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>{{ titulo }}</title>
+</head>
+<body>
+<h2>{{ titulo }}</h2>
+{% if error %}<p style="color: red;">{{ error }}</p>{% endif %}
+<form action="{% url 'operaciones:resultado' %}" method="post">
+    {% csrf_token %}
+    Primer número:
+    <input type="text" name="numero1"><br>
+    Segundo número:
+    <input type="text" name="numero2"><br>
+    Operación:
+    <select name="operacion">
+        {% for clave, datos in operaciones.items %}
+        <option value="{{ clave }}">{{ datos.0|capfirst }}</option>
+        {% endfor %}
+    </select><br>
+    <input type="submit" value="Calcular">
+</form>
+<p><a href="{% url 'inicio' %}">Volver al inicio</a></p>
+</body>
+</html>

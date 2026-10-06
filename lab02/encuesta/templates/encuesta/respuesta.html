@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>{{ titulo }}</title>
+</head>
+<body>
+<h2>{{ titulo }}</h2>
+<p>Nombre: {{ nombre }}</p>
+<p>Clave: {{ clave }}</p>
+<p>Educación: {{ educacion }}</p>
+<p>Nacionalidad: {{ nacionalidad }}</p>
+<p>Idiomas:</p>
+<ul>
+    {% for item in idiomas %}
+    <li>{{ item }}</li>
+    {% empty %}
+    <li>Ninguno</li>
+    {% endfor %}
+</ul>
+<p>Email: {{ correo }}</p>
+<p>Sitio Web: {{ website }}</p>
+<p><a href="{% url 'encuesta:index' %}">Volver al formulario</a></p>
+</body>
+</html>

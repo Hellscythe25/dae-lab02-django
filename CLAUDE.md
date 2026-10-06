@@ -7,7 +7,7 @@ Este archivo da contexto a Claude Code sobre este proyecto.
 - **Nombre:** DAE Laboratorios Remoto – Semana 2 (Tecsup, Desarrollo de Aplicaciones Web)
 - **Tema:** Flujo de trabajo en Django: definir controladores (views) y pasar datos a las plantillas.
 - **Enunciado:** `DAE_Laboratorio 2.docx` (en la raíz). El laboratorio es individual.
-- **Estado:** en planificación; aún no se crea el proyecto Django.
+- **Estado:** código de las tres apps implementado y con pruebas (`python manage.py test`). Falta que el alumno grabe el video, tome las capturas finales y revise `docs/conclusiones.md` (borrador).
 
 ## Entorno
 
@@ -30,19 +30,18 @@ Semana 2/
 └── docs/                  respuestas de la Actividad 1 y conclusiones
 ```
 
-## Comandos (una vez creado el entorno)
+## Comandos
 
 ```powershell
-python -m venv myvenv
 myvenv\Scripts\activate
-pip install django
-django-admin startproject lab02
 cd lab02
-python manage.py startapp <app>
-python manage.py runserver
+python manage.py runserver      # http://localhost:8000
 python manage.py check
 python manage.py test
 ```
+
+Entorno nuevo desde cero: `python -m venv myvenv`, activar, `pip install django`.
+El servidor también se puede lanzar desde `.claude/launch.json` (configuración `lab02`).
 
 ## Alcance del laboratorio
 
@@ -50,7 +49,7 @@ python manage.py test
 2. **Actividad 2:** app `encuesta` siguiendo el docx (formulario POST, vista `enviar`, `respuesta.html`, `{% csrf_token %}`).
 3. **Tarea:** apps `operaciones` y `cilindro` en el mismo proyecto.
    - Operaciones: resultado tipo `La suma de 18 + 19 = 37`.
-   - Cilindro: V = π·(d/2)²·h con diámetro y altura en metros. Ejemplo: d=2,15 y h=1,75 da 6.35338096859 m³.
+   - Cilindro: V = π·(d/2)²·h con diámetro y altura en metros. Ejemplo: d=2,15 y h=1,75 da 6.35338026803 m³ con `math.pi` (el docx muestra 6.35338096859 porque usa π≈3.141593).
 4. **Entregables:** capturas de código y ejecución, video de máximo 4 minutos (lo graba el alumno) y conclusiones.
 
 La rúbrica evalúa: views, paso de datos a la plantilla, URLs/enrutamiento, visualización en el template y la tarea adicional. También puntúan la puntualidad y la ortografía de las conclusiones.

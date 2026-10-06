@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "lab02",
+      "runtimeExecutable": "myvenv/Scripts/python.exe",
+      "runtimeArgs": ["lab02/manage.py", "runserver", "8000", "--noreload"],
+      "port": 8000
+    }
+  ]
+}

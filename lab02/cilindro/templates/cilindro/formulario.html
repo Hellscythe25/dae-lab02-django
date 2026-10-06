@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>{{ titulo }}</title>
+</head>
+<body>
+<h2>{{ titulo|upper }}</h2>
+{% if error %}<p style="color: red;">{{ error }}</p>{% endif %}
+<form action="{% url 'cilindro:calcular' %}" method="post">
+    {% csrf_token %}
+    <p>Introduzca el diámetro en metros:
+        <input type="text" name="diametro"></p>
+    <p>Introduzca la altura en metros:
+        <input type="text" name="altura"></p>
+    <input type="submit" value="Calcular">
+</form>
+<p><a href="{% url 'inicio' %}">Volver al inicio</a></p>
+</body>
+</html>
